@@ -1,8 +1,7 @@
 ---
-layout: single
-title:  "A Blue Team Blog"
-date:   2018-11-25 11:00:00 +0000
-categories:
+type: post
+title: "A Blue Team Blog"
+date: 2018-11-25 11:00:00 +0000
 ---
 
 Welcome and thanks for taking the time to visit. I've been toying with the idea of setting up a small blue team focused blog for some time now, so here we are... 

@@ -1,6 +1,6 @@
 ---
-layout: single
-title: Whoami
+type: page
+title: whoami
 permalink: /whoami/
 ---
 
