@@ -58,9 +58,9 @@ We're also going to want to install a few extras such as git and the Windows 7 r
 
 `choco install rsat`
 
-# Installing Sysmon and Configuring Event Logging
+# Sysmon and Windows Event Logging
 
-Detecting these sorts of attacks on Windows is not possible out the box and some form of process logging is essential. Windows can be configured to perform rudimentary process logging but Sysmon or an EDR solution should be considered mandatory in any enterprise environment. We'll look at both outputs to compare and see how Sysmon and EDR tools can help create much higher fidelity detections.
+Detecting these sorts of attacks on Windows is not possible out the box and having process logging is essential. Windows can be configured to perform rudimentary process logging but Sysmon or an EDR solution should be considered mandatory in any enterprise environment. We'll look at both outputs to compare and see how Sysmon and EDR tools can help create much higher fidelity detections.
 
 1. Download sysmon <https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon>
 2. Clone the sysmon config with `git clone https://github.com/SwiftOnSecurity/sysmon-config.git`
@@ -72,7 +72,9 @@ We will also want to configure Windows [Event ID 4688](https://www.ultimatewindo
 2. Navigate to `Local Policies -> Audit Policy -> Audit Process Tracking`
 3. Edit Audit Process Tracking to enable "Success"
 
-# Installing Atomic Red Team
+# Atomic Red Team
+
+
 
 # Executing the T1127 Test
 
