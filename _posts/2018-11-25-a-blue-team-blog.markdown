@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "A Blue Team Blog"
 date:   2018-11-25 11:00:00 +0000
 categories:
@@ -11,7 +11,7 @@ While there are plenty great blue team security researchers out there I feel it'
 
 This blog is an attempt to do that, and I hope get the opportunity to both share with and learn from this great infosec community.
 
-### A quick intro
+# A quick intro
 
 I've worked in security for some time, and currently look after security operations for a large financial. This covers the SOC, threat intel, vulnerability management, pentesting and a whole host of other random stuff that comes through the door on a daily basis.
 
@@ -30,7 +30,7 @@ The stupendously huge amount of enterprise systems, techniques, attacks, malware
 
 I fully sympathise with anyone who feels like they are drowning under this weight of this, I am too! 
 
-### So how do we make progress? 
+# So how do we make progress? 
 
 One thing red teams are very good at, and blue teams very poor, is making use of the huge range of excellent open source frameworks and tools. I fully believe that by standing on the collective shoulders of giants in the infosec community we can address these issues and make our orgs measurably more secure.
 

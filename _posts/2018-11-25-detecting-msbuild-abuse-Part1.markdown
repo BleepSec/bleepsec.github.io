@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "Detecting MSBuild.exe Abuse (Part 1)"
 date:   2018-11-25 11:47:14 +0000
 categories:
@@ -33,7 +33,7 @@ Now lets get started!
 
 # MSBuild Technique Overview
 
-Casey's blog is no longer available however you can find the original article on the Wayback Machine <https://web.archive.org/web/20161212224652/http://subt0x10.blogspot.com/2016/09/bypassing-application-whitelisting.html> and a quick google will find many other examples of offensive usage.
+Casey's blog is no longer available however you can find the original article on the [Wayback Machine](https://web.archive.org/web/20161212224652/http://subt0x10.blogspot.com/2016/09/bypassing-application-whitelisting.html) and a quick google will find many other examples of offensive usage.
 
 >I found a Microsoft signed tool called MSBuild.exe. This is a default .NET utility that ships with Windows. I usually start with the question; ‘HOW could I get MSbuild to execute code for me?’.
 >
