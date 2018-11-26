@@ -107,7 +107,7 @@ Lets get it installed then take a closer look.
 3. Load the powershell module `Import-Module .\execution-frameworks\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam.psm1`
 4. View the module options using `get-help Invoke-AtomicTest`
 
-Atomic red team uses the Mitre Att&ck framework to categorise tests depending in the type of technique. If you haven't used the Att&ck before then I thoroughly recommend spending some time reading it, because it's an invaluable resource describing attacker tools, techniques and procedures.
+Atomic red team uses the Mitre Att&ck framework to categorise tests depending in the type of technique. If you haven't used Att&ck before then I thoroughly recommend spending some time reading it, because it's an invaluable resource describing attacker tools, techniques and procedures.
 
 We're looking for information on MSBuild and searching the Att&ck matrix for "MSBuild" brings us to the page [Trusted Developer Utilities](https://attack.mitre.org/techniques/T1127/), which is exactly what we want.
 
