@@ -1,0 +1,86 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: BleepSec - Letters from a security operations stoic
+#email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  A collection of thoughts on security operations, blue team, pentesting, CTF's and 
+  infosec
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://bleepsec.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: BleepSec
+github_username:  BleepSec
+locale: "en-GB"
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+      toc: false
+      classes: wide
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+paginate: 5 # amount of posts to show
+paginate_path: /page:num/
+
+include: ["_pages"]
+
+author:
+  name: "BleepSec"
+  avatar: "/assets/img/bio-photo.jpg"
+  bio: "Mainly in it for the bleeps and blinking lights. Security ops n00b, defending the world from gen v mega cybers with my full spectrum dark blockchain"
+  location: "In the cyber pipes"
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/BleepSec"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/BleepSec"
+
+# Build settings
+markdown: kramdown
+remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin: "dark"
+
+plugins:
+  - jekyll-feed
+  - jekyll-include-cache
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
