@@ -31,12 +31,13 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: false
+      author_profile: true
       read_time: true
       comments: false
       share: true
       related: true
-      toc: true
+      toc: false
+      classes: wide
   # _pages
   - scope:
       path: ""
@@ -49,6 +50,19 @@ paginate: 5 # amount of posts to show
 paginate_path: /page:num/
 
 include: ["_pages"]
+
+author:
+  name: "BleepSec"
+  avatar: "/assets/img/bio-photo.jpg"
+  bio: "Mainly in it for the bleeps and blinking lights. Security ops n00b, defending the world from gen v mega cybers with my full spectrum dark blockchain"
+  location: "In the cyber pipes"
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/BleepSec"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/BleepSec"
 
 # Build settings
 markdown: kramdown
