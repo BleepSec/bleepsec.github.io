@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Using Att&ck and Atomic Red Team to Detect MSBuild Abuse (Part 2)"
-date: 2018-12-01 11:16:00 +0000
+date: 2018-12-08 13:02:00 +0000
 categories:
 ---
 Following on from [part 1](https://bleepsec.com/2018/11/26/using-attack-atomic-red-team-part1.html) where we used Mitre Att&ck and Atomic Red Team to perform our attack and generate test log events we're now going to build the detections and documentation.
@@ -23,7 +23,7 @@ Installing Sigma is a straight forward git clone procedure similar to the other 
 3. From the sigma folder run `pip3 install -r tools/requirements.txt`
 4. Next run `python .\tools\sigmac --help` to see our available options
 
-We can now search the sigma rules for a relevant YAML file and use the `sigmac` compiler to output the use case into our preferred format. In this article I'll use Splunk however you can modify the output to be compatible with ArcSight, Qradar, Elasticsearch or even just grep or powershell.
+We can now search the sigma rules for a relevant yaml file and use the `sigmac` compiler to output the use case into our preferred format. In this article I'll use Splunk however you can modify the output to be compatible with ArcSight, Qradar, Elasticsearch or even just grep or powershell.
 
 Searching the repo for "MSBuild" brings us to `rules/windows/builtin/win_possible_applocker_bypass.yml` and this is exactly what we're looking for. Take some time to review the full yaml file but I'll highlight the key parts as follows.
 
@@ -42,7 +42,7 @@ tags:
     - attack.defense_evasion
 ```
 
-Next we can see how the detection is created, there is a list of known exploitable .exe files that can be used as defence evasion techniques and specifically the [T1127](https://attack.mitre.org/techniques/T1127/) MSBuild technique.
+Next we can review how the detection is created, there is a list of known exploitable .exe files that can be used as defence evasion techniques and specifically the [T1127](https://attack.mitre.org/techniques/T1127/) MSBuild technique.
 
 The file also described any false positives that may occur. In a large enterprise it's likely the level of false positives may be quite high on any DevOps build servers or certain developer desktops.
 
@@ -98,7 +98,7 @@ Executing `python tools/sigmac -t splunk rules/windows/builtin/win_possible_appl
 2. Only create the Sysmon rule so we have more control for whitelisting and tuning by adding the `--filter logsource=sysmon` option
 3. Output to a file for easier viewing and copy/paste by adding `--output ./T1127.txt`
 
-Our final command and the Splunk rule should look something like the below code snippets and searching Splunk should now find us some suspicious events!
+Our final command and the Splunk rule should look something like the below code snippets, and then searching Splunk should find us some suspicious events!
 
 ```
 python tools/sigmac -t splunk rules/windows/builtin/win_possible_applocker_bypass.yml --config .\tools\config\splunk-windows-all.yml --filter logsource=sysmon --output ./T1127.txt
@@ -120,9 +120,9 @@ A clear and effective documentation framework was open sourced by the [Palantir]
 
 The ADS framework documents consist of sections on goals and technical context to allow SOC analysts to quickly understand the alert and sections on blind spots, assumptions, false positives and validation to allow for effective investigation and improvement.
 
-There are excellent examples already in the ADS framework repo, and an example for our MSBuild detection can be found as follows. 
+There are excellent examples already in the ADS framework repo, and an example for our MSBuild detection can be found below.
 
-https://github.com/BleepSec/alerting-detection-strategy-framework/blob/msbuild-blog/ADS-Examples/006-MBBuild-Trusted-Dev-Tools-Bypass.md.  
+[https://github.com/BleepSec/alerting-detection-strategy-framework/blob/msbuild-blog/ADS-Examples/006-MBBuild-Trusted-Dev-Tools-Bypass.md](https://github.com/BleepSec/alerting-detection-strategy-framework/blob/msbuild-blog/ADS-Examples/006-MBBuild-Trusted-Dev-Tools-Bypass.md)
 
 # Summary
 
