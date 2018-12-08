@@ -51,6 +51,13 @@ paginate_path: /page:num/
 
 include: ["_pages"]
 
+# Google Analytics
+analytics:
+  provider: "google-universal"
+  google:
+     tracking_id: "UA-4945425-23"
+     anonymize_ip: false
+
 author:
   name: "BleepSec"
   avatar: "/assets/img/bio-photo.jpg"
