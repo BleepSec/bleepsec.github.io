@@ -217,4 +217,4 @@ We can also see any file creation events and in the second image an example of a
 
 We've now got some log data for this technique and also started building a robust, repeatable, enterprise ready framework for all our blue team detection use cases in future.
 
-Using Att&ck and Atomic Red Team to Detect MSBuild Abuse (Part 2) will expand on this to create detection logic, draft our documentation and review common false positives.
+[Using Att&ck and Atomic Red Team to Detect MSBuild Abuse (Part 2)](https://bleepsec.com/2018/12/08/using-attack-atomic-red-team-part2.html) will expand on this to create detection logic, draft our documentation and review common false positives.
