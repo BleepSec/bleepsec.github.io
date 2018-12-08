@@ -102,7 +102,7 @@ Enter [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team), a syste
 Lets get it installed then take a closer look.
 
 1. Clone Atomic Red Team with `git clone https://github.com/redcanaryco/atomic-red-team`
-2. Install powershell-yaml dependencies from an admin powershell window with `Install-Module -Name powershell-yaml`
+2. Install powershell-yaml dependencies from a powershell window with `Install-Module -Name powershell-yaml`
 3. Cd into the repo directory, in my case it's `cd C:\Coding\atomic-red-team`
 3. Load the powershell module `Import-Module .\execution-frameworks\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam.psm1`
 4. View the module options using `get-help Invoke-AtomicTest`
@@ -183,6 +183,8 @@ As we can see in the snippets the payload executes two inline tasks to print a c
  *Note 25/11/2018 - There appears to be a a bug or some missing features and running Invoke-AtomicTest as described in the documentation doesn't specify the correct path for the source file. We can do a quick hack to fix this in line 2 by configuring the path directly.*
 
 ```powershell
+#Don't forget to import the module if you didn't do that above
+Install-Module -Name powershell-yaml
 # Load the T1127 Trusted Developer Utilties test
 $T1127 = Get-AtomicTechnique -Path .\atomics\T1127\T1127.yaml
 # Set the correct file including full path
