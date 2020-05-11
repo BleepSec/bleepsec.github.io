@@ -22,7 +22,7 @@ Skills tested:
 
 ## Scanning and Enumeration
 
-Let start with my [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA) inspired nmap scan options of `nmap -sC -sV -oA nmap/lame 10.10.10.3` which will give us a good idea of what's on the box.
+Lets start with an [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA) inspired nmap scan using the options `nmap -sC -sV -oA nmap/lame 10.10.10.3` which will give us a good idea of what's on the box.
 
 Nmap options explained:
 
@@ -99,13 +99,13 @@ Host script results:
 |_smb2-time: Protocol negotiation failed (SMB2)
 ```
 
-SMB is a very popular target, both Windows and Linux have remote code execution vulnerabilities and misconfigurations are a common method for gaining a foodhold or exposing sensitive information.
+SMB is a very popular target, both Windows and Linux have remote code execution vulnerabilities and misconfigurations are a common method for gaining a foothold or exposing sensitive information.
 
 Enumeration of SMB using `enum4linux -a 10.10.10.3` and `smbclient -L \\10.10.10.3` usually provides interesting results.
 
 **Unfortunately, at the time of writing, the virtual machine clock is out of sync and this means that SMB can fail to connect with the error *protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED* resulting in difficulty enumerating further**
 
-We can continue our enumeration by searching <https://exploit-db.com> for Samba 3.0.20 and find another Metasploit module. This time for a 'Username' map script' Command Execution vulnerability which looks promising.
+We can continue our enumeration by searching <https://exploit-db.com> for Samba 3.0.20 and find another Metasploit module. This time for a "Username map script Command Execution" vulnerability which looks promising.
 
 ![Search results on exploitdb.com](/assets/img/samba-exploit.png){: .align-center}
 
@@ -140,13 +140,13 @@ Finally, we simply type `exploit` and...
 
 ![vsftpd exploit failure](/assets/img/vsftpd-exploit-fail.png){: .align-center}
 
-Unfortunately, we get the "Exploit completed, but no session was created" error message which usually means that the target is not actually vulnerable. Perhaps some naughty CTF creator fixed it without updating the version and left us with a rabbit hole to get stuck in? :smirk:
+Unfortunately, we get the "Exploit completed, but no session was created" error message which usually means that the target is not actually vulnerable. Perhaps some naughty CTF creator fixed it without updating the version and left us with a rabbit hole to get stuck in? ;)
 
 That failure does not stop us though, we have more exploits to try!
 
 ### Samba Exploitation
 
-Following the same steps as before we can use MEtasploit again to try the Samba 3.0.20 username map command execution vulenrably.
+Following the same steps as before we can use Metasploit again to try the Samba 3.0.20 username map command execution vulenrably.
 
 1. Type `search Samba` within Metasploit
 2. Select the module by typing `use exploit/multi/samba/usermap_script`
@@ -157,4 +157,4 @@ This time we should see something much better, a sucessful command shell where c
 
 ![sucessful command shell](/assets/img/samba-exploit-msfconsole.png){: .align-center}
 
-You now have completely rooted this system, so pillage away and grab those user.txt and root.txt flags. Congrats!
+You now have completely rooted this system, so pillage away and grab those user.txt and root.txt flags. Congrats on an awesome hack!
