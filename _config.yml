@@ -55,7 +55,7 @@ include: ["_pages"]
 analytics:
   provider: "google-universal"
   google:
-     tracking_id: "UA-4945425-23"
+     tracking_id: "UA-166183148-1"
      anonymize_ip: false
 
 author:
