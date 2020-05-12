@@ -1,9 +1,9 @@
 ---
 type: post
-title: "Hack the Box Lame Writeup"
+title: "Hack the Box Lame Write-up"
 date: 2020-05-11 20:27:00 +1000
 ---
-Welcome to the first in this series of writeups of "OSCP-like" boxes as inspired by TJNull's great article about [OSCP preparation.](https://www.netsecfocus.com/oscp/2019/03/29/The_Journey_to_Try_Harder-_TJNulls_Preparation_Guide_for_PWK_OSCP.html)
+Welcome to the first in this series of write-ups of "OSCP-like" boxes as inspired by TJNull's great article about [OSCP preparation.](https://www.netsecfocus.com/oscp/2019/03/29/The_Journey_to_Try_Harder-_TJNulls_Preparation_Guide_for_PWK_OSCP.html)
 
 The OSCP certification is a hands-on exam. With the requirement to hack multiple boxes in the exam lab and produce a detailed pentesting report it relies heavily on real world skills. To begin we will be hacking Lame from <https://hackthebox.eu> and because this is a retired box, we are allowed to post public solutions.
 
@@ -11,7 +11,7 @@ The OSCP certification is a hands-on exam. With the requirement to hack multiple
 
 ![Lame information image](/assets/img/htb-lame-info.png){: .align-right}
 
-Lame is an easy Linux based box from HTB and was one of the earliest that went live. It is a very easy box but also a great example of how powerful some RCE vulnerabilties can be, especially in core networking services like SMB and Samba!
+Lame is an easy Linux based box from HTB and was one of the earliest that went live. It is a very easy box but also a great example of how powerful some RCE vulnerabilities can be, especially in core networking services like SMB and Samba!
 
 Skills tested:
 
@@ -52,13 +52,13 @@ Breaking down the nmap results gives us the following services that we can inves
 |_End of status
 ```
 
-The nmap option `-sC` already ran the default ftp-anon.nse script for us and we can see that that the FTP allows for anonymous access. Nmap has also identified the version as vsfptd 2.3.4
+The nmap option `-sC` already ran the default ftp-anon.nse script for us and we can see that that the FTP allows for anonymous access. Nmap has also identified the version as vsftpd 2.3.4
 
 This FTP server does not contain any interesting files but vsftpd 2.3.4 is vulnerable to a backdoor command injection. Running `searchsploit vsftpd 2.3.4` will find a Metasploit module for this!
 
 ![Searchsploit for vsftpd 2.3.4](/assets/img/searchsploit-vsftpd.png){: .align-center}
 
-We could also google the service and version to arrive at the Rapid7 metasplolit module documentation.
+We could also google the service and version to arrive at the Rapid7 metasploit module documentation.
 
 <https://www.rapid7.com/db/modules/exploit/unix/ftp/vsftpd_234_backdoor>
 
@@ -107,7 +107,7 @@ Enumeration of SMB using `enum4linux -a 10.10.10.3` and `smbclient -L \\10.10.10
 
 We can continue our enumeration by searching <https://exploit-db.com> for Samba 3.0.20 and find another Metasploit module. This time for a "Username map script Command Execution" vulnerability which looks promising.
 
-![Search results on exploitdb.com](/assets/img/samba-exploit.png){: .align-center}
+![Search results on exploit-db.com](/assets/img/samba-exploit.png){: .align-center}
 
 ## Exploitation
 
@@ -146,15 +146,15 @@ That failure does not stop us though, we have more exploits to try!
 
 ### Samba Exploitation
 
-Following the same steps as before we can use Metasploit again to try the Samba 3.0.20 username map command execution vulenrably.
+Following the same steps as before we can use Metasploit again to try the Samba 3.0.20 username map command execution vulnerability.
 
 1. Type `search Samba` within Metasploit
 2. Select the module by typing `use exploit/multi/samba/usermap_script`
 3. Set the RHOSTS with `set RHOSTS 10.10.10.3`
 4. And `exploit`
 
-This time we should see something much better, a sucessful command shell where can run Linux commands and we seem to be root!
+This time we should see something much better, a successful command shell where can run Linux commands and we seem to be root!
 
-![sucessful command shell](/assets/img/samba-exploit-msfconsole.png){: .align-center}
+![successful command shell](/assets/img/samba-exploit-msfconsole.png){: .align-center}
 
 You now have completely rooted this system, so pillage away and grab those user.txt and root.txt flags. Congrats on an awesome hack!

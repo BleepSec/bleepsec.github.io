@@ -1,9 +1,9 @@
 ---
 type: post
-title: "Hack the Box Legacy Writeup"
+title: "Hack the Box Legacy Write-up"
 date: 2020-05-12 10:00:00 +1000
 ---
-Welcome to the next in this series of writeups of "OSCP-like" boxes. This time we will be attacking Legacy which is another simple hack the box machine.
+Welcome to the next in this series of write-ups of "OSCP-like" boxes. This time we will be attacking Legacy which is another simple hack the box machine.
 
 ## Overview
 
@@ -49,7 +49,7 @@ Host script results:
 
 ### Port 139 and 445 SMB
 
-The goto tools for SMB enumeration are `smbclient -L \\10.10.10.4` and `enum4linux -a 10.10.10.4` however we appear to be running itno the same time sync and clock skew issues which are preventing some enumeration. This could also be caused when SMB null session are disabled but this is unlikely on Windows XP.
+The goto tools for SMB enumeration are `smbclient -L \\10.10.10.4` and `enum4linux -a 10.10.10.4` however we appear to be running into the same time sync and clock skew issues which are preventing some enumeration. This could also be caused when SMB null session are disabled but this is unlikely on Windows XP.
 
 ![Legacy enum4linux output](/assets/img/legacy-enum4linux.png){: .align-center}
 
@@ -59,7 +59,7 @@ All is not lost however, since Windows XP has a very famous and reliable SMB vul
 
 ## Exploitation
 
-Some buffer overflows can be unstable but the good news is that MS08-067 is a very reliable exploit and the Metasploit module is well tested. Following the instructions on the Rapid7 page should make this easy, we can usually leave the targetting as "Automatic" and the exploit will find the correct offset for the Windows XP version and language.
+Some buffer overflows can be unstable but the good news is that MS08-067 is a very reliable exploit and the Metasploit module is well tested. Following the instructions on the Rapid7 page should make this easy, we can usually leave the targeting as "Automatic" and the exploit will find the correct offset for the Windows XP version and language.
 
 1. `msfconsole`
 2. `search ms08-067`

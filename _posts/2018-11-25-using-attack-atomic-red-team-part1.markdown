@@ -2,11 +2,10 @@
 layout: single
 title:  "Using Att&ck and Atomic Red Team to Detect MSBuild Abuse (Part 1)"
 date:   2018-11-26 21:32:14 +0000
-categories:
 ---
 Creating SIEM use cases for any organisation can be a daunting task. The increasing number of advanced (and not so advanced!) techniques leave many security operations teams with a mess of half-working, undocumented and untested use cases. Building a robust, repeatable framework to create, test and document the detection of new threats is essential.  
 
-In this post we're going to walk through using the popular [Mitre Att&ck framework](https://attack.mitre.org/matrices/enterprise/) and some excellent open source tools to help us build an enterprise ready framework for creating, testing and documenting use cases. 
+In this post we're going to walk through using the popular [Mitre Att&ck framework](https://attack.mitre.org/matrices/enterprise/) and some excellent open source tools to help us build an enterprise ready framework for creating, testing and documenting use cases.
 
 In part one we will configure our test system and generate some log data of the attack technique
 
@@ -18,9 +17,9 @@ In part one we will configure our test system and generate some log data of the 
 
 Then in part 2 we will begin creating some detection use cases and documentation
 
-6. Run Sigma to generate initial SIEM use cases
-7. Use the Palantir Alerting and Detection Framework to create draft use case documentation
-8. Investigate other MSBuild.exe techniques and refine our use cases
+1. Run Sigma to generate initial SIEM use cases
+2. Use the Palantir Alerting and Detection Framework to create draft use case documentation
+3. Investigate other MSBuild.exe techniques and refine our use cases
 
 To do this we will be using the following tools
 
@@ -34,9 +33,9 @@ To do this we will be using the following tools
 
 Now lets get started!
 
-# MSBuild Technique Overview
+## MSBuild Technique Overview
 
-MSBuild is a technique discovered by Casey Smith ([@SubTee](https://twitter.com/subTee)) to execute code and bypass applocker, device guard or other whitelisting solutions. It's great for executing 1st stage payloads then performing more advanced injection techniques for (almost) diskless implants and C2. 
+MSBuild is a technique discovered by Casey Smith ([@SubTee](https://twitter.com/subTee)) to execute code and bypass applocker, device guard or other whitelisting solutions. It's great for executing 1st stage payloads then performing more advanced injection techniques for (almost) diskless implants and C2.
 
 This technique has been proven to be used in the wild so will make a great example for our framework.
 
@@ -46,7 +45,7 @@ Casey's blog is no longer available however you can find the original article on
 >
 >Turns out, MSBuild.exe has a built in capability called “Inline Tasks”.  These are snippets of C# code that can be used to enrich the C# build process.  Essentially, what this does, is take an XML file, compile and execute in memory on the target, so it is not a traditional image/module execution event.
 
-# Installing a Test VM Using FlareVM 
+## Installing a Test VM Using FlareVM
 
 FlareVM is designed to quickly setup a Windows 7 based malware analysis VM but it's also an excellent base package for a general security research. Think of it a little like Kali for Windows.
 
@@ -59,7 +58,7 @@ If you don't have a valid license key then Microsoft offer pre-built images for 
 3. Follow the instructions to install FlareVM <https://www.fireeye.com/blog/threat-research/2018/11/flare-vm-update.html>
 4. **Note** when running install.ps1 just hit enter when asked for a password, the IEUser autologin is already configured in the image
 
-We're also going to want to install a few extras such as git and the Windows 7 remote administration tools (RSAT) so lets do that now. 
+We're also going to want to install a few extras such as git and the Windows 7 remote administration tools (RSAT) so lets do that now.
 
 Installing tools using the Chocolatey package manager setup by FlareVM is as simple as opening an admin cmd or powershell window and typing the below.
 
@@ -67,9 +66,9 @@ Installing tools using the Chocolatey package manager setup by FlareVM is as sim
 
 `choco install rsat`
 
-# Endpoint Visibility with Sysmon and Windows Event Logging
+## Endpoint Visibility with Sysmon and Windows Event Logging
 
-Detecting these sorts of attacks on Windows is not possible out the box and having process logging is essential. 
+Detecting these sorts of attacks on Windows is not possible out the box and having process logging is essential.
 
 Windows can be configured to perform rudimentary process logging but Sysmon or an EDR solution should be considered mandatory in any enterprise environment. We'll look at both outputs to compare and see how Sysmon and EDR tools can help create much higher fidelity detections.
 
@@ -85,7 +84,7 @@ We will also want to configure Windows [Event ID 4688](https://www.ultimatewindo
 
 ![Group policy config for Event ID 4688](/assets/img/eventid4688_policy_config.png){: .align-center}
 
-We can verify both logging options are working by opening any application and viewing the logs within Windows Event Viewer. In this example you can open notepad and should see event logs similar to below. First is the built in event id 4688 from `Windows Logs\Security` 
+We can verify both logging options are working by opening any application and viewing the logs within Windows Event Viewer. In this example you can open notepad and should see event logs similar to below. First is the built in event id 4688 from `Windows Logs\Security`
 
 ![Standard Win 7 EventID 4688](/assets/img/eventid4688_example.png){: .align-center}
 
@@ -93,9 +92,9 @@ Next is the Sysmon event from `Application and Service Logs\Microsoft\Windows\Sy
 
 ![Sysmon log event](/assets/img/eventid4688_sysmon_example.png){: .align-center}
 
-# Planning a Simulation Using Mitre Att&ck and Atomic Red Team
+## Planning a Simulation Using Mitre Att&ck and Atomic Red Team
 
-We can't always perform a full red team to test every specific control, but it's important we can verify an attackers TTP using real data. So how do we do this? 
+We can't always perform a full red team to test every specific control, but it's important we can verify an attackers TTP using real data. So how do we do this?
 
 Enter [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team), a system for running small self contained "atomic tests" all based on the Mitre Att&ck framework.
 
@@ -104,8 +103,8 @@ Lets get it installed then take a closer look.
 1. Clone Atomic Red Team with `git clone https://github.com/redcanaryco/atomic-red-team`
 2. Install powershell-yaml dependencies from a powershell window with `Install-Module -Name powershell-yaml`
 3. Cd into the repo directory, in my case it's `cd C:\Coding\atomic-red-team`
-3. Load the powershell module `Import-Module .\execution-frameworks\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam.psm1`
-4. View the module options using `get-help Invoke-AtomicTest`
+4. Load the powershell module `Import-Module .\execution-frameworks\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam\Invoke-AtomicRedTeam.psm1`
+5. View the module options using `get-help Invoke-AtomicTest`
 
 Atomic red team uses the Mitre Att&ck framework to categorise tests depending in the type of technique. If you haven't used Att&ck before then I thoroughly recommend spending some time reading it, because it's an invaluable resource describing attacker tools, techniques and procedures.
 
@@ -123,7 +122,7 @@ Take note of the ID highlighted in bold, this is what we need to run our test.
 >Contributors:  Casey Smith, Matthew Demaske, Adaptforward  
 >Version: 1.0
 
-Now we have the Att&ck technique ID we can review the test within Atomic Red Team. 
+Now we have the Att&ck technique ID we can review the test within Atomic Red Team.
 
 Navigate to `./atomics/T1127/T1127.yaml` and review the yaml file, this is how the tests are configured. There are 3 tests in this file but we're only interested in MSBuild in the snippet below. The important parts here are the msbuild.exe command and the filename containing the payload.
 
@@ -158,6 +157,7 @@ As we can see in the snippets the payload executes two inline tasks to print a c
     ]]>
 </Code>
 ```
+
 ```xml
 <Code Type="Class" Language="cs">
     <![CDATA[
@@ -176,7 +176,7 @@ As we can see in the snippets the payload executes two inline tasks to print a c
 </Code>
 ```
 
-# Executing Atomic Test T1127 to Generate Event Log Data
+## Executing Atomic Test T1127 to Generate Event Log Data
 
  And now we're ready to test! Using Invoke-AtomicTest we can execute the "Trusted Developer Utilities" set of tasks which includes the MSBuild test we've just reviewed.
 
@@ -197,7 +197,7 @@ On successful execution of the test you should see something similar to below. D
 
 ![Powershell output from Invoke-AtomicTest](/assets/img/t1127-test-output.png){: .align-center}
 
-# Reviewing Windows Logs
+## Reviewing Windows Logs
 
 The MSBuild.exe test has completed successfully and we should have some results in both the Windows security log and Sysmon log. Let take a look!
 
@@ -213,7 +213,7 @@ We can also see any file creation events and in the second image an example of a
 
 ![Powershell output from Invoke-AtomicTest](/assets/img/msbuild-sysmon-file.png){: .align-center}
 
-# Summary
+## Summary
 
 We've now got some log data for this technique and also started building a robust, repeatable, enterprise ready framework for all our blue team detection use cases in future.
 
