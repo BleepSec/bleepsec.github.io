@@ -4,17 +4,17 @@ title: "A Blue Team Blog"
 date: 2018-11-25 11:00:00 +0000
 ---
 
-Welcome and thanks for taking the time to visit. I've been toying with the idea of setting up a small blue team focused blog for some time now, so here we are... 
+Welcome and thanks for taking the time to visit. I've been toying with the idea of setting up a small blue team focused blog for some time now, so here we are...
 
-While there are plenty great blue team security researchers out there I feel it's still quite an under represented area compared to red team viewpoints. With huge volumes of high quality research and constant new threats it's a massive job for defensive security professionals to stay up to date and convert the information into something actionable within their organisations. 
+While there are plenty great blue team security researchers out there I feel it's still quite an under represented area compared to red team viewpoints. With huge volumes of high quality research and constant new threats it's a massive job for defensive security professionals to stay up to date and convert the information into something actionable within their organisations.
 
 This blog is an attempt to do that, and I hope get the opportunity to both share with and learn from this great infosec community.
 
-# A quick intro
+## A quick intro
 
 I've worked in security for some time, and currently look after security operations for a large financial. This covers the SOC, threat intel, vulnerability management, pentesting and a whole host of other random stuff that comes through the door on a daily basis.
 
-From my own experience and talking to other security folks it's clear there's a huge challenge implementing effective security operations into organisations, and a growing gap between the people who do it well and the people who don't. 
+From my own experience and talking to other security folks it's clear there's a huge challenge implementing effective security operations into organisations, and a growing gap between the people who do it well and the people who don't.
 
 The specific problems might vary across different organisations but a few themes always stick out as common pain points.
 
@@ -25,11 +25,11 @@ The specific problems might vary across different organisations but a few themes
 - Improving controls on legacy infrastructure is a mammoth job
 - New cloud or SaaS systems are implemented without best practice
 
-The stupendously huge amount of enterprise systems, techniques, attacks, malware and vulnerabilities make for a massive job to prioritise what SIEM use cases to implement or what tools to purchase. 
+The stupendously huge amount of enterprise systems, techniques, attacks, malware and vulnerabilities make for a massive job to prioritise what SIEM use cases to implement or what tools to purchase.
 
-I fully sympathise with anyone who feels like they are drowning under this weight of this, I am too! 
+I fully sympathise with anyone who feels like they are drowning under this weight of this, I am too!
 
-# So how do we make progress? 
+## So how do we make progress
 
 One thing red teams are very good at, and blue teams very poor, is making use of the huge range of excellent open source frameworks and tools. I fully believe that by standing on the collective shoulders of giants in the infosec community we can address these issues and make our orgs measurably more secure.
 
