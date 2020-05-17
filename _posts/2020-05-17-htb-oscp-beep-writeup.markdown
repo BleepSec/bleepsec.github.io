@@ -1,7 +1,7 @@
 ---
 type: post
 title: "Hack the Box Beep Write-up"
-date: 2020-05-17 10:00:00 +1000
+date: 2020-05-17 11:37:00 +1000
 ---
 Continuing the "OSCP-like" boxes series with Beep from Hack the Box.
 
